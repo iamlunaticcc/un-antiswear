@@ -1,0 +1,28 @@
+{
+  "name": "antiswear-bot",
+  "version": "1.0.0",
+  "description": "Ant-Swear Bot, is a Discord bot, Made to prevent swearing/toxicity. And to make a better community for everyone, That uses this bot for their server. Anti-Swear Bot was made with Typescript, As it is the language i am working with currently. Hope this bot gives you the results it was made for.",
+  "main": "app.ts",
+  "scripts": {
+    "start": "tsc app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slayerinc/AntiSwear-Bot.git"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "antiswear"
+  ],
+  "author": "SlayerInc",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/slayerinc/AntiSwear-Bot/issues"
+  },
+  "homepage": "https://github.com/slayerinc/AntiSwear-Bot#readme",
+  "dependencies": {
+    "@types/node": "^14.6.2",
+    "discord.js": "^12.3.1"
+  }
+}
