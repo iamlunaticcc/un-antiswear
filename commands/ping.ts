@@ -2,21 +2,18 @@ import { Client, Message, MessageEmbed } from "discord.js";
 const config = require("../config.json");
 
 module.exports.conf = {
-    name: "help"
+    name: "ping"
 }
 
-module.exports.execute = async (client: Client, message: Message, args: String[]) => {
-    // Embeds
+module.exports.execute = async (client: Client, message: Message) => {
+    // Embed
     const msgembed: MessageEmbed = new MessageEmbed()
     .setColor(config.highlight)
-    .setTitle("Help")
-    .addFields({
-        name: "ping",
-        value: "Returns the ping from the bots hosted location"
-    })
+    .setTitle("Ping")
+    .setDescription(`Ping: \`${client.ws.ping}ms\``)
     .setTimestamp()
     .setFooter(config.footer);
 
-    // Send message
+    // Message
     await message.channel.send(msgembed);
 }

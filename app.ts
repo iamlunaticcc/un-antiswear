@@ -1,5 +1,5 @@
 // Imports
-import { Client, Message, Collection } from "discord.js";
+import { Client, Message } from "discord.js";
 
 // Definitions
 const client: Client = new Client();
