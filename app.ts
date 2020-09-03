@@ -4,14 +4,23 @@ import { Client, Message } from "discord.js";
 // Definitions
 const client: Client = new Client();
 const config = require("./config.json");
+const db = require("quick.db");
 
 // Message Event
 client.on("message", async (message: Message) => {
-    if (!message.content.startsWith(config.prefix)) return;
-    if (!message.guild) return;
-    if (message.author.bot) return;
+    let prefix; let get = db.get(`prefix_${message.guild.id}`);
 
-    const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+    if (get) {
+        prefix = get;
+    } else {
+        prefix = config.prefix;
+    }
+
+    if (message.author.bot) return;
+    if (!message.guild) return;
+    if (!message.content.startsWith(prefix)) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
     const cmd = args.shift().toLowerCase();
 
     if (cmd.length === 0) return;

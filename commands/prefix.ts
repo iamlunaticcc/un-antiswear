@@ -1,28 +1,26 @@
 import { Client, Message, MessageEmbed } from "discord.js";
+const db = require("quick.db");
 const config = require("../config.json");
 
 module.exports.conf = {
-    name: "help"
+    name: "prefix"
 }
 
 module.exports.execute = async (client: Client, message: Message, args: String[]) => {
-    // Embeds
+    // Embed
     const msgembed: MessageEmbed = new MessageEmbed()
     .setColor(config.highlight)
-    .setTitle("Help")
-    .addFields({
-        name: "ping",
-        value: "Returns the ping from the bot's hosted location"
-    }, {
-        name: "uptime",
-        value: "Returns the uptime of the bot"
-    }, {
-        name: "prefix",
-        value: "Set the prefix of the bot for your server"
-    })
+    .setTitle("Prefix")
+    .setDescription(`Updated prefix to \`${args[0]}\``)
     .setTimestamp()
     .setFooter(config.footer);
 
-    // Send message
+    // Check permissions
+    if (!message.member.hasPermission("MANAGE_GUILD")) return;
+
+    // Set prefix
+    db.set(`prefix_${message.guild.id}`, args[0]);
+
+    // Message
     await message.channel.send(msgembed);
 }
