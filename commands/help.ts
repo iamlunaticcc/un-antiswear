@@ -12,7 +12,10 @@ module.exports.execute = async (client: Client, message: Message, args: String[]
     .setTitle("Help")
     .addFields({
         name: "ping",
-        value: "Returns the ping from the bots hosted location"
+        value: "Returns the ping from the bot's hosted location"
+    }, {
+        name: "uptime",
+        value: "Returns the uptime of the bot"
     })
     .setTimestamp()
     .setFooter(config.footer);

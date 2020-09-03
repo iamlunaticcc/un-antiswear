@@ -23,6 +23,7 @@
   "homepage": "https://github.com/slayerinc/AntiSwear-Bot#readme",
   "dependencies": {
     "@types/node": "^14.6.2",
-    "discord.js": "^12.3.1"
+    "discord.js": "^12.3.1",
+    "quick.db": "^7.1.1"
   }
 }
