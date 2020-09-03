@@ -1,20 +1,36 @@
 // Imports
 import { Client, Message, Collection } from "discord.js";
-import { token } from "./config.json";
 
 // Definitions
 const client: Client = new Client();
-const commands = new Collection();
+const config = require("./config.json");
 
-// Handlers
-["event", "command"].map((handle) => {
-    require(`./handlers/${handle}`)(client, commands);
+// Message Event
+client.on("message", async (message: Message) => {
+    if (!message.content.startsWith(config.prefix)) return;
+    if (!message.guild) return;
+    if (message.author.bot) return;
+
+    const args = message.content.slice(config.prefix.length).trim().split(/ +/);
+    const cmd = args.shift().toLowerCase();
+
+    if (cmd.length === 0) return;
+
+    const command = require(`./commands/${cmd}`);
+
+    if (!command) return;
+
+    command.execute(client, message, args);
 });
 
 // Bot ready
 client.on("ready", () => {
+    // Print out line
     console.log("Bot Started");
+
+    // Set bot status
+    client.user.setActivity("AntiSwear Bot | !help", { type: "WATCHING" });
 });
 
 // Login
-client.login(token);
+client.login(config.token);
